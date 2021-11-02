@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block content %}
+
+    <div class="text-center mw-500 m-auto">
+        <div class="m-5">
+            <h2>만화, 웹툰 영상화</h2>
+        </div>
+        <div>
+            <form action="{% url 'animateapp:create' %}"
+                  enctype="multipart/form-data"
+                  method="post">
+                {% csrf_token %}
+                {% bootstrap_form form layout='horizontal' %}
+                <div id="image_container"></div>
+                <div class="m-5">
+                    <input type="submit" class="btn btn-dark rounded-pill px-5">
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        <!-- 삭제 버튼이 클릭되면 이미지 안보이게 한 후 숨겨진 삭제 체크박스 값 변경 -->
+        document.getElementById('imageClearBtn').addEventListener('click', function(e) {
+            document.getElementById('imagePreview').src = "";
+            document.getElementById('chk-{{ name }}).checked = true;
+        });
+
+        // 파일 선택 이벤트 등록
+        var imgFieldCtrl = document.getElementById('{{ id }}')
+        imgFieldCtrl.addEventListener('change', function(e) {
+            if (imgFieldCtrl.files && imgFieldCtrl.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                }
+
+                // convert to base64 string
+                reader.readAsDataURL(document.getElementById('{{ id }}').files[0]);
+            }
+        });
+    </script>
+
+{% endblock %}
