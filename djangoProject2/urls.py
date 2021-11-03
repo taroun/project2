@@ -21,7 +21,7 @@ from django.urls import path, include
 from animateapp.views import AnimateCreateView
 
 urlpatterns = [
-    path('', AnimateCreateView.as_view(), name='create'),
+    path('', AnimateCreateView.as_view()),
 
     path('admin/', admin.site.urls),
     path('animates/', include('animateapp.urls')),

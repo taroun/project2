@@ -1,15 +1,20 @@
-from django.forms import ModelForm, forms
+from django.forms import ModelForm, forms, FileInput, HiddenInput
 
 from animateapp.custom_widgets import PreviewImageFileWidget
-from animateapp.models import CropAni
+from animateapp.models import Animate
 
 
 class AnimateCreationForm(ModelForm):
     class Meta:
-        model = CropAni
-        fields = ['image']
-        #widgets = {
-        #    'image': PreviewImageFileWidget()
-        #}
+        model = Animate
+        fields = ['image', 'ani']
+        widgets = {
+            #'ani': PreviewImageFileWidget(),
+            'ani': HiddenInput(attrs={
+                'class': "form-control p-1",
+                'id': 'ani',
+                'style': ""
+            }),
+        }
 
         
