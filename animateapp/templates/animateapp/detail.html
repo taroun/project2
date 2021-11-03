@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container text-center">
+
+        <div class="my-5">
+            <video width="530" height="440" controls autoplay>
+                <source src="{{ target_animate.ani.url }}" type="video/mp4" />
+            </video>
+        </div>
+        <div class="my-5">
+            <form action='{% url 'animateapp:download' pk=target_animate.pk %}'>
+                <button type="submit">
+                다운로드
+                </button>
+            </form>
+            <a href="{% url 'animateapp:create' %}"
+               class="btn btn-success rounded-pill px-5">
+                처음으로
+            </a>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
