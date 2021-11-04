@@ -14,7 +14,7 @@ from animateapp.models import Animate
 
 from PIL import Image
 import pytesseract
-import cv2.cv2 as cv2
+import cv2
 import os
 
 pytesseract.pytesseract.tesseract_cmd = R'C:\Django\lib\Tesseract-OCR\tesseract'
@@ -36,7 +36,7 @@ class AnimateCreateView(CreateView):
         image_len_list = crop(path)
 
         #이미지와 길이를 가져와 순서대로 영상화
-        video, video_path = view_seconds(image_len_list)
+        video_path = view_seconds(image_len_list)
         temp_upload.ani = video_path
         temp_upload.save()
         return super().form_valid(form)
@@ -90,7 +90,9 @@ def crop(path):
 
 def img_text_len(img):
     out_text = pytesseract.image_to_string(img, lang='kor+eng', config='--psm 1 -c preserve_interword_spaces=1')
-    print("길이:"+str(len(out_text)))
+    out_text = out_text.replace("\n", "")
+    out_text.strip()
+    print("길이:" + str(len(out_text)))
     print(out_text)
     return len(out_text)
 
@@ -98,7 +100,7 @@ def img_text_len(img):
 def view_seconds(image_list):
     nowdate = datetime.datetime.now()
     daytime = nowdate.strftime("%Y-%m-%d_%H%M%S")
-    video_name = 'ani/'+daytime+'.mp4'
+    video_name = 'ani/'+daytime+'.avi'
     out_path = 'media/' + video_name
     fourcc = cv2.VideoWriter_fourcc(*'DIVX')  # define the video codec
 
@@ -114,4 +116,4 @@ def view_seconds(image_list):
     cv2.destroyAllWindows()
     video.release()
 
-    return video, video_name
+    return video_name
