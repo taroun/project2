@@ -1,4 +1,4 @@
-from django.forms import ModelForm, forms, FileInput, HiddenInput
+from django.forms import ModelForm, HiddenInput
 
 from animateapp.custom_widgets import PreviewImageFileWidget
 from animateapp.models import Animate
@@ -9,12 +9,8 @@ class AnimateCreationForm(ModelForm):
         model = Animate
         fields = ['image', 'ani']
         widgets = {
-            #'ani': PreviewImageFileWidget(),
-            'ani': HiddenInput(attrs={
-                'class': "form-control p-1",
-                'id': 'ani',
-                'style': ""
-            }),
+            #'image': PreviewImageFileWidget(),
+            'ani': HiddenInput(),
         }
 
         

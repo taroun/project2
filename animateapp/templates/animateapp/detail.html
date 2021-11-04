@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
     <div class="container text-center">
-
         <div class="my-5">
-            <video width="530" height="440" controls autoplay>
+            <video id="vid" width="530" height="440" controls autoplay="autoplay" muted="muted">
                 <source src="{{ target_animate.ani.url }}" type="video/mp4" />
+                Your browser does not support the video tag.
             </video>
         </div>
         <div class="my-5">
             <form action='{% url 'animateapp:download' pk=target_animate.pk %}'>
-                <button type="submit">
+                <button type="submit" class="btn btn-success rounded-pill px-5">
                 다운로드
                 </button>
+                <a href="{% url 'animateapp:create' %}"
+                   class="btn btn-success rounded-pill px-5">
+                    처음으로
+                </a>
             </form>
-            <a href="{% url 'animateapp:create' %}"
-               class="btn btn-success rounded-pill px-5">
-                처음으로
-            </a>
+
         </div>
 
     </div>
+    <script> document.getElementById('vid').play(); </script>
 
 
 
