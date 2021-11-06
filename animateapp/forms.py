@@ -1,6 +1,5 @@
 from django.forms import ModelForm, HiddenInput
 
-from animateapp.custom_widgets import PreviewImageFileWidget
 from animateapp.models import Animate
 
 
