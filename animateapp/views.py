@@ -89,8 +89,8 @@ def img_text_len(img):
     #반환된 text의 줄바꿈과 앞,뒤 공백등을 제거
     out_text = out_text.replace("\n", "")
     out_text.strip()
-    #print("길이:" + str(len(out_text)))
-    #print(out_text)
+    print("길이:" + str(len(out_text)))
+    print(out_text)
     #글자수를 반환
     return len(out_text)
 
